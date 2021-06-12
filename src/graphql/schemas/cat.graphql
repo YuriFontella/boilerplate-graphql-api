@@ -1,0 +1,19 @@
+type Query {
+  cats: [Cat] @auth
+}
+
+type Human {
+  name: String
+}
+
+type Cat {
+  id: ID
+  name: String
+  image: String
+  user_id: Int
+  updated_at: String
+  created_at: String
+  owner: Human!
+}
+
+directive @auth on OBJECT | FIELD_DEFINITION

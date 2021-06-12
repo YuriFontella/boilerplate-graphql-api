@@ -1,0 +1,10 @@
+type Query {
+  counters: Dashboard @auth
+}
+
+type Dashboard {
+  users: Int
+  cats: Int
+}
+
+directive @auth on OBJECT | FIELD_DEFINITION

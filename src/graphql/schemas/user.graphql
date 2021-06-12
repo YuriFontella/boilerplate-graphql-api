@@ -1,0 +1,30 @@
+type Query {
+  users: [User]
+}
+
+type Mutation {
+  login(email: String!, password: String!): Auth!
+}
+
+type Auth {
+  user: User!
+  token: String!
+}
+
+type User {
+  id: ID
+  name: String
+  email: String
+  role: String
+  status: Boolean
+  updated_at: String
+  created_at: String
+}
+
+type Notification {
+  message: String
+}
+
+type Subscription {
+  notification: Notification
+}

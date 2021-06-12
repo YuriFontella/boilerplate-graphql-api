@@ -1,0 +1,10 @@
+'use strict'
+
+const { mergeTypeDefs } = require('@graphql-tools/merge')
+const { loadFilesSync } = require('@graphql-tools/load-files')
+
+const { join } = require('path')
+
+const types = loadFilesSync(join(__dirname), { extensions: ['graphql'] })
+
+module.exports = mergeTypeDefs(types)
