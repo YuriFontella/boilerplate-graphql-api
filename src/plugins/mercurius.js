@@ -4,9 +4,19 @@ const fp = require('fastify-plugin')
 
 const mercurius = require('mercurius')
 
-const typeDefs = require('../graphql/schemas')
-const resolvers = require('../graphql/resolvers')
-const loaders = require('../graphql/loaders')
+const { resolve } = require('path')
+
+const { loadFilesSync } = require('@graphql-tools/load-files')
+const { mergeTypeDefs, mergeResolvers } = require('@graphql-tools/merge')
+
+const filesTypeDefs = loadFilesSync(resolve('src/graphql/schemas'), { extensions: ['graphql'] })
+const typeDefs = mergeTypeDefs(filesTypeDefs)
+
+const filesResolvers = loadFilesSync(resolve('src/graphql/resolvers', '*.resolvers.*'))
+const resolvers = mergeResolvers(filesResolvers)
+
+const filesLoaders = loadFilesSync(resolve('src/graphql/loaders', '*.loaders.*'))
+const loaders = mergeResolvers(filesLoaders)
 
 const { permissions } = require('../graphql/shield/permissions')
 
