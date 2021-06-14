@@ -27,12 +27,9 @@ module.exports = fp(async (app) => {
         .first()
 
       if (session) {
-
-        context.current_user_id = session.id
-        context.current_user_role = session.role
+        context.current_user = session
 
         return true
-
       }
 
       else throw new Error('A sessão não foi encontrada')
