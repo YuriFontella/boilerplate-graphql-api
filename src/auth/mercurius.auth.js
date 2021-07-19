@@ -23,7 +23,7 @@ module.exports = fp(async (app) => {
         .innerJoin('users', (knex) => {
           knex.on('users.id', 'sessions.user_id').on('users.status', context.app.knex.raw('?', [true]))
         })
-        .where({ access_token: context.app.crypto.hash(context.auth.identity) })
+        .where({ access_token: context.app.crypto.hash(context.auth.identity), is_revoked: false })
         .first()
 
       if (session) {
